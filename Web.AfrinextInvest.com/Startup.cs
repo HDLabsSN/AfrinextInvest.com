@@ -3,9 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.EntityFrameworkCore;
 using Web.AfrinextInvest.com.Models;
-using MySQL.Data.EntityFrameworkCore.Extensions;
+using Microsoft.EntityFrameworkCore;
 
 namespace Web.AfrinextInvest.com
 {
@@ -29,10 +28,10 @@ namespace Web.AfrinextInvest.com
             // Add framework services.
             services.AddMvc();
 
-            // utilisation de MySQL en tant que Data Provide
+            // utilisation de MySQL en tant que Data Provider
             var MySQLConnexionString = Configuration.GetConnectionString("MySQLConnection");
 
-            services.AddDbContext<AfrinextInvestContext>(options => options.UseMySQL(MySQLConnexionString));
+            services.AddDbContext<AfrinextInvestContext>(options => options.UseMySql(MySQLConnexionString));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
