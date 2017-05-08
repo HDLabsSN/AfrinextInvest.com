@@ -1,0 +1,83 @@
+@model IEnumerable<Web.AfrinextInvest.com.Models.PartSociale>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.NomActivite)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DescriptionActivite)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AgeActivite)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ChiffreAffaire)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NbPartsACeder)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PrixUnitaire)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SecteurActivite)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Pays)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ActiviteVerifiee)
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomActivite)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DescriptionActivite)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AgeActivite)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChiffreAffaire)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NbPartsACeder)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrixUnitaire)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SecteurActivite)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pays)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ActiviteVerifiee)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

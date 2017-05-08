@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace Web.AfrinextInvest.com.Models
 {
@@ -14,5 +10,7 @@ namespace Web.AfrinextInvest.com.Models
         }
 
         public DbSet<Projets> Projets { get; set; }
+
+        public DbSet<PartSociale> PartSociale { get; set; }
     }
 }

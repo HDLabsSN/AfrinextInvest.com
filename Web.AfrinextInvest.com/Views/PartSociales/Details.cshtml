@@ -1,0 +1,72 @@
+@model Web.AfrinextInvest.com.Models.PartSociale
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PartSociale</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NomActivite)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NomActivite)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DescriptionActivite)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DescriptionActivite)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AgeActivite)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AgeActivite)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ChiffreAffaire)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ChiffreAffaire)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NbPartsACeder)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NbPartsACeder)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PrixUnitaire)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PrixUnitaire)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SecteurActivite)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SecteurActivite)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Pays)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Pays)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ActiviteVerifiee)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ActiviteVerifiee)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
