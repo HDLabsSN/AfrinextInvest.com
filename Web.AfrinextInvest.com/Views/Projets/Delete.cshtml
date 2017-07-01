@@ -1,4 +1,4 @@
-@model Web.AfrinextInvest.com.Models.Projets
+@model Web.AfrinextInvest.com.Models.Projet
 
 @{
     ViewData["Title"] = "Delete";
@@ -8,7 +8,7 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Projets</h4>
+    <h4>Projet</h4>
     <hr />
     <dl class="dl-horizontal">
         <input type="hidden" asp-for="Id" />
@@ -31,22 +31,16 @@
             @Html.DisplayFor(model => model.Pays)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.SecteurActivite)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.SecteurActivite)
-        </dd>
-        <dt>
             @Html.DisplayNameFor(model => model.BudgetRequis)
         </dt>
         <dd>
             @Html.DisplayFor(model => model.BudgetRequis)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.DateCreation)
+            @Html.DisplayNameFor(model => model.SecteurActvite)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.DateCreation)
+            @Html.DisplayFor(model => model.SecteurActvite.nomSecteur)
         </dd>
     </dl>
     

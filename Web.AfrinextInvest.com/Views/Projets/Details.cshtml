@@ -1,54 +1,49 @@
-@model Web.AfrinextInvest.com.Models.Projets
+@model Web.AfrinextInvest.com.Models.Projet
+@using System.Globalization;
 
 @{
     ViewData["Title"] = "Details";
+    // Gets a NumberFormatInfo associated with the en-US culture.
+    NumberFormatInfo nfi = new CultureInfo("fr-SN").NumberFormat;
+
+    string etatVerification = null;
+
+    if (Model.isVerified)
+    {
+        etatVerification = "<span href=\"#\" class=\"btn-link\"><i class=\"glyphicon glyphicon-ok-sign\"></i> Verifie</span>";
+    }
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>Projets</h4>
+<section class="row container" style="height:auto;">
+    <h1>@Model.Nom</h1>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nom)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Nom)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Pays)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Pays)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.SecteurActivite)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.SecteurActivite)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.BudgetRequis)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.BudgetRequis)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.DateCreation)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DateCreation)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+    <article class="col-md-8">
+        <div class="col-md-12" style="height:400px;background:#eee;""></div>
+        <div class="col-md-12">
+            <a href="#" class="btn btn-link"><i class="glyphicon glyphicon-flash"></i> @Model.SecteurActvite.nomSecteur</a>
+            <a href="#" class="btn btn-link"><i class="glyphicon glyphicon-map-marker"></i> @Model.Pays</a>
+            @etatVerification
+        </div>
+    </article>
+
+    <aside class="col-md-4">
+        <div class="panel-body well">
+            <p>
+                <span class="lead"> <i class="glyphicon glyphicon-usd text-success"></i> 25 000 CFA</span> Engages <br />
+                <span class="lead"> <i class="glyphicon glyphicon-usd text-success"></i> @Model.BudgetRequis.ToString("C0", nfi)</span> Requis <br />
+                <span class="lead"> <i class="glyphicon glyphicon-user text-success"></i> 14 Contributions</span> <br />
+                <span class="lead"> <i class="glyphicon glyphicon-hourglass text-success"></i> 2 jours </span> - Duree d'execution
+            </p>
+            <a href="#" class="btn btn-success col-md-12">J'investis dans ce projet</a>
+            <a href="#" class="btn btn-link col-md-6" style="margin-top:1em;"> <i class="glyphicon glyphicon-thumbs-up"></i> J'aime ce projet</a>
+            <a href="#" class="btn btn-link col-md-6" style="margin-top:1em;"> <i class="glyphicon glyphicon-retweet"></i> Partager</a>
+        </div>
+    </aside>
+
+    <hr/>
+
+    <article class="col-md-8">
+        <p>@Model.Description</p>
+    </article>
+</section>

@@ -1,67 +1,64 @@
-@model IEnumerable<Web.AfrinextInvest.com.Models.Projets>
-
+@model IEnumerable<Web.AfrinextInvest.com.Models.Projet>
+@using System.Globalization;
 @{
     ViewData["Title"] = "Index";
+    long nbProjects = Model.LongCount();
+
+    // Gets a NumberFormatInfo associated with the en-US culture.
+    NumberFormatInfo nfi = new CultureInfo("fr-SN").NumberFormat;
 }
 
-
-<section class="container jumbotron">
-    <h1>Les projets</h1>
-    <a asp-action="Create" class="btn btn success">Démarrer un projet</a>
+<section class="container jumbotron text-center">
+    <h1 class="text-center">Faites financer vos projets</h1>
+    <a asp-action="Create" class="btn btn-success"> <i class="glyphicon glyphicon-send"></i> Demarrer un projet</a>
 </section>
 
+<p>
+    @nbProjects projets soumis
+</p>
 
-<table class="table">
-    <thead>
-        <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Nom)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Description)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Pays)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.SecteurActivite)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.BudgetRequis)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DateCreation)
-                </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nom)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Pays)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SecteurActivite)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BudgetRequis)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateCreation)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<section class="container">
+    @foreach (var item in Model)
+    {
+        string etatVerification = null;
+        if (item.isVerified)
+        {
+            etatVerification = "<span href=\"#\" class=\"btn-link\"><i class=\"glyphicon glyphicon-ok-sign text-success pull-right\"></i></span>";
+        }
+
+        <div class="col-md-3">
+            <article class=" panel panel-default" style="margin:0.2em;">
+                <div class="panel-heading" style="height:130px;"></div>
+                <div class="panel-body" style="min-height:180px;">
+                    <small>@item.SecteurActvite.nomSecteur</small> 
+                    @etatVerification
+                    <span style="font-size:1.3em;" data-toggle="tooltip" data-placement="bottom" title="Verifie" class="glyphicon glyphicon-heart-empty text-danger pull-right"></span>
+                    
+                    <h4 class="text-left ani-project-title"> <a asp-action="Details" asp-route-id="@item.Id"> @Html.DisplayFor(modelItem => item.Nom) </a> </h4>
+                    
+                    <small style="position:relative;top:-7px;"> <i class="glyphicon glyphicon-map-marker"></i> @item.Pays </small>
+                    <p class="ani-project-description"> @Html.DisplayFor(modelItem => item.Description) </p>
+
+                    <div class="ani-project-report" style="margin-top: 2em; padding-top: 1em; border-top: 3px solid #00ff21;">
+                        <div class="col-md-3 text-center" style="padding:0;"> 
+                            <i class="glyphicon glyphicon-user"></i><br />
+                            14 <br />
+                            <small>Contributions</small>
+                        </div>
+                        <div class="col-md-6 text-center" style="padding:0;"> 
+                            <i class="glyphicon glyphicon-usd"></i><br />  
+                            <small> @item.BudgetRequis.ToString("C0", nfi) </small>
+                            <small>Collectes</small>
+                        </div>
+                        <div class="col-md-3 text-center" style="padding:0;"> 
+                            <i class="glyphicon glyphicon-hourglass"></i><br />
+                            20j <br />
+                            <small>Restant</small>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    }
+
+</section>

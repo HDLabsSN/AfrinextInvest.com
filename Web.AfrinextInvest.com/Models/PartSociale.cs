@@ -5,7 +5,9 @@ namespace Web.AfrinextInvest.com.Models
     public class PartSociale
     {
         [Key]
+        [ScaffoldColumn(false)]
         public int Id { get; set; }
+
         public string NomActivite { get; set; }
         public string DescriptionActivite { get; set; }
         public int AgeActivite { get; set; }

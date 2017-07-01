@@ -8,8 +8,8 @@ using Web.AfrinextInvest.com.Models;
 namespace Web.AfrinextInvest.com.Migrations
 {
     [DbContext(typeof(AfrinextInvestContext))]
-    [Migration("20170507221523_InitialPartSociale")]
-    partial class InitialPartSociale
+    [Migration("20170629141515_remiseAPlat")]
+    partial class remiseAPlat
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -44,7 +44,7 @@ namespace Web.AfrinextInvest.com.Migrations
                     b.ToTable("PartSociale");
                 });
 
-            modelBuilder.Entity("Web.AfrinextInvest.com.Models.Projets", b =>
+            modelBuilder.Entity("Web.AfrinextInvest.com.Models.Projet", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -53,17 +53,54 @@ namespace Web.AfrinextInvest.com.Migrations
 
                     b.Property<DateTime>("DateCreation");
 
-                    b.Property<string>("Description");
+                    b.Property<DateTime>("DerniereModification");
 
-                    b.Property<string>("Nom");
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(480);
 
-                    b.Property<string>("Pays");
+                    b.Property<string>("Nom")
+                        .IsRequired()
+                        .HasMaxLength(50);
 
-                    b.Property<string>("SecteurActivite");
+                    b.Property<string>("Pays")
+                        .IsRequired();
+
+                    b.Property<int>("SecteurId");
+
+                    b.Property<bool>("isDraft");
+
+                    b.Property<bool>("isVerified");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("SecteurId");
+
                     b.ToTable("Projets");
+                });
+
+            modelBuilder.Entity("Web.AfrinextInvest.com.Models.SecteurActivite", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("description");
+
+                    b.Property<string>("nomSecteur")
+                        .IsRequired()
+                        .HasMaxLength(30);
+
+                    b.HasKey("id");
+
+                    b.ToTable("SecteurActivite");
+                });
+
+            modelBuilder.Entity("Web.AfrinextInvest.com.Models.Projet", b =>
+                {
+                    b.HasOne("Web.AfrinextInvest.com.Models.SecteurActivite", "SecteurActvite")
+                        .WithMany("Projets")
+                        .HasForeignKey("SecteurId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
         }
     }

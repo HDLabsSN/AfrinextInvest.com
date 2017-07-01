@@ -1,10 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 using Web.AfrinextInvest.com.Models;
 
 namespace Web.AfrinextInvest.com.Controllers
@@ -21,7 +20,8 @@ namespace Web.AfrinextInvest.com.Controllers
         // GET: Projets
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Projets.ToListAsync());
+            var afrinextInvestContext = _context.Projets.Include(p => p.SecteurActvite);
+            return View(await afrinextInvestContext.ToListAsync());
         }
 
         // GET: Projets/Details/5
@@ -32,19 +32,21 @@ namespace Web.AfrinextInvest.com.Controllers
                 return NotFound();
             }
 
-            var projets = await _context.Projets
+            var projet = await _context.Projets
+                .Include(p => p.SecteurActvite)
                 .SingleOrDefaultAsync(m => m.Id == id);
-            if (projets == null)
+            if (projet == null)
             {
                 return NotFound();
             }
 
-            return View(projets);
+            return View(projet);
         }
 
         // GET: Projets/Create
         public IActionResult Create()
         {
+            ViewData["SecteurId"] = new SelectList(_context.SecteurActivite, "id", "nomSecteur");
             return View();
         }
 
@@ -53,15 +55,25 @@ namespace Web.AfrinextInvest.com.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nom,Description,Pays,SecteurActivite,BudgetRequis,DateCreation")] Projets projets)
+        public async Task<IActionResult> Create([Bind("Nom,Description,Pays,SecteurId,BudgetRequis")] Projet projet)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(projets);
+                // L'enregistrement de la date de création du projet se fait de façon automatique
+                projet.DateCreation = DateTime.Now;
+
+                // Par défaut le projet est enregistré en tant que brouillon
+                projet.isDraft = true;
+
+                // Par défaut le projet n'est pas vérifié par les administrateurs
+                projet.isVerified = false;
+
+                _context.Add(projet);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(projets);
+            ViewData["SecteurId"] = new SelectList(_context.SecteurActivite, "id", "nomSecteur", projet.SecteurId);
+            return View(projet);
         }
 
         // GET: Projets/Edit/5
@@ -72,12 +84,13 @@ namespace Web.AfrinextInvest.com.Controllers
                 return NotFound();
             }
 
-            var projets = await _context.Projets.SingleOrDefaultAsync(m => m.Id == id);
-            if (projets == null)
+            var projet = await _context.Projets.SingleOrDefaultAsync(m => m.Id == id);
+            if (projet == null)
             {
                 return NotFound();
             }
-            return View(projets);
+            ViewData["SecteurId"] = new SelectList(_context.SecteurActivite, "id", "nomSecteur", projet.SecteurId);
+            return View(projet);
         }
 
         // POST: Projets/Edit/5
@@ -85,9 +98,9 @@ namespace Web.AfrinextInvest.com.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nom,Description,Pays,SecteurActivite,BudgetRequis,DateCreation")] Projets projets)
+        public async Task<IActionResult> Edit(int id, [Bind("Nom,Description,Pays,SecteurId,BudgetRequis")] Projet projet)
         {
-            if (id != projets.Id)
+            if (id != projet.Id)
             {
                 return NotFound();
             }
@@ -96,12 +109,12 @@ namespace Web.AfrinextInvest.com.Controllers
             {
                 try
                 {
-                    _context.Update(projets);
+                    _context.Update(projet);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProjetsExists(projets.Id))
+                    if (!ProjetExists(projet.Id))
                     {
                         return NotFound();
                     }
@@ -112,7 +125,8 @@ namespace Web.AfrinextInvest.com.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            return View(projets);
+            ViewData["SecteurId"] = new SelectList(_context.SecteurActivite, "id", "nomSecteur", projet.SecteurId);
+            return View(projet);
         }
 
         // GET: Projets/Delete/5
@@ -123,14 +137,15 @@ namespace Web.AfrinextInvest.com.Controllers
                 return NotFound();
             }
 
-            var projets = await _context.Projets
+            var projet = await _context.Projets
+                .Include(p => p.SecteurActvite)
                 .SingleOrDefaultAsync(m => m.Id == id);
-            if (projets == null)
+            if (projet == null)
             {
                 return NotFound();
             }
 
-            return View(projets);
+            return View(projet);
         }
 
         // POST: Projets/Delete/5
@@ -138,13 +153,13 @@ namespace Web.AfrinextInvest.com.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var projets = await _context.Projets.SingleOrDefaultAsync(m => m.Id == id);
-            _context.Projets.Remove(projets);
+            var projet = await _context.Projets.SingleOrDefaultAsync(m => m.Id == id);
+            _context.Projets.Remove(projet);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
-        private bool ProjetsExists(int id)
+        private bool ProjetExists(int id)
         {
             return _context.Projets.Any(e => e.Id == id);
         }

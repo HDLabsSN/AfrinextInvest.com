@@ -8,9 +8,10 @@ using Web.AfrinextInvest.com.Models;
 namespace Web.AfrinextInvest.com.Migrations
 {
     [DbContext(typeof(AfrinextInvestContext))]
-    partial class AfrinextInvestContextModelSnapshot : ModelSnapshot
+    [Migration("20170630125209_remiseAPlat3")]
+    partial class remiseAPlat3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1");

@@ -8,9 +8,10 @@ using Web.AfrinextInvest.com.Models;
 namespace Web.AfrinextInvest.com.Migrations
 {
     [DbContext(typeof(AfrinextInvestContext))]
-    partial class AfrinextInvestContextModelSnapshot : ModelSnapshot
+    [Migration("20170629191026_remiseAPlat2")]
+    partial class remiseAPlat2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1");
@@ -55,7 +56,8 @@ namespace Web.AfrinextInvest.com.Migrations
                     b.Property<DateTime>("DerniereModification");
 
                     b.Property<string>("Description")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasMaxLength(480);
 
                     b.Property<string>("Nom")
                         .IsRequired()
@@ -63,10 +65,6 @@ namespace Web.AfrinextInvest.com.Migrations
 
                     b.Property<string>("Pays")
                         .IsRequired();
-
-                    b.Property<string>("Resume")
-                        .IsRequired()
-                        .HasMaxLength(480);
 
                     b.Property<int>("SecteurId");
 

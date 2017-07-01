@@ -1,4 +1,4 @@
-@model Web.AfrinextInvest.com.Models.Projets
+@model Web.AfrinextInvest.com.Models.Projet
 
 @{
     ViewData["Title"] = "Create";
@@ -8,7 +8,7 @@
 
 <form asp-action="Create">
     <div class="form-horizontal">
-        <h4>Projets</h4>
+        <h4>Projet</h4>
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
@@ -19,9 +19,16 @@
             </div>
         </div>
         <div class="form-group">
+            <label asp-for="Resume" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <textarea asp-for="Resume" class="form-control"></textarea>
+                <span asp-validation-for="Resume" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
             <label asp-for="Description" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="Description" class="form-control" />
+                <textarea rows="15" asp-for="Description" class="form-control" ></textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
         </div>
@@ -33,10 +40,9 @@
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="SecteurActivite" class="col-md-2 control-label"></label>
+            <label asp-for="SecteurId" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="SecteurActivite" class="form-control" />
-                <span asp-validation-for="SecteurActivite" class="text-danger"></span>
+                <select asp-for="SecteurId" class ="form-control" asp-items="ViewBag.SecteurId"></select>
             </div>
         </div>
         <div class="form-group">
@@ -44,13 +50,6 @@
             <div class="col-md-10">
                 <input asp-for="BudgetRequis" class="form-control" />
                 <span asp-validation-for="BudgetRequis" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="DateCreation" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="DateCreation" class="form-control" />
-                <span asp-validation-for="DateCreation" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
