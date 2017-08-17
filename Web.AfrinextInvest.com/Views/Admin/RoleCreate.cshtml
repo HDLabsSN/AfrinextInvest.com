@@ -1,0 +1,30 @@
+﻿@model Web.AfrinextInvest.com.Identity.Role
+@{
+    ViewData["Title"] = "Nouveau Role";
+    Layout = "_SubLayout";
+}
+
+<section class="col-md-10">
+    <h2>Nouveau rôle d'utilisateur</h2>
+    <hr />
+    <div class="col-md-12" style="margin:0.5em auto;">
+    </div>
+        
+    <div class="col-md-6">
+        <form asp-action="RoleCreate" method="post">
+            <div class="form-group">
+                <label asp-for="Name">Nom</label>
+                <input class="form-control" asp-for="Name" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Description">Description</label>
+                <textarea class="form-control" asp-for="Description"></textarea>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Enregistrer" class="btn btn-success" />
+                <a asp-action="RolesIndex" class="btn btn-danger">Annuler</a>
+            </div>
+        </form>
+    </div>
+
+</section>

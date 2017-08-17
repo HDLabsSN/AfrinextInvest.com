@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Web.AfrinextInvest.com.Models.Projet>
+
+@{ 
+    Layout = "_SubLayout";
+}
+
+<section class="col-md-10 col-sm-9">
+    <h2>Liste des projets soumis</h2>
+    <hr />
+
+    <table class="table table-responsive table-striped">
+        <thead>
+            <tr>
+                <th>N°</th>
+                <th>Nom</th>
+                <th>Budget requis</th>
+                <th>Secteur d'activité</th>
+                <th>Pays d'activité</th>
+                <th>Statut</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Nom</td>
+                    <td>@item.BudgetRequis</td>
+                    <td>@item.SecteurActvite.nomSecteur</td>
+                    <td>@item.Pays</td>
+                    <td>
+                        @if(@item.isVerified && !@item.isDraft)
+	                    {
+		                        <span class="text-success">Vérifié</span>
+                        }
+                        else {
+                            @if (!@item.isVerified && !@item.isDraft)
+                            {
+                                <span class="text-warning">En attente</span>
+                            }
+                            else
+                            {
+                                <span class="text-danger">Brouillon</span>
+                            }
+                        }
+                    </td>
+                    <td>
+                        <a asp-action="ProjectDetails" asp-route-Id="@item.Id" class="btn btn-link">Détails</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</section>

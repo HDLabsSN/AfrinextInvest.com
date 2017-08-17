@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -44,6 +45,7 @@ namespace Web.AfrinextInvest.com.Controllers
         }
 
         // GET: Projets/Create
+        [Authorize]
         public IActionResult Create()
         {
             ViewData["SecteurId"] = new SelectList(_context.SecteurActivite, "id", "nomSecteur");
@@ -55,7 +57,7 @@ namespace Web.AfrinextInvest.com.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Nom,Description,Pays,SecteurId,BudgetRequis")] Projet projet)
+        public async Task<IActionResult> Create([Bind("Nom,Description,Pays,Resume,SecteurId,BudgetRequis")] Projet projet)
         {
             if (ModelState.IsValid)
             {

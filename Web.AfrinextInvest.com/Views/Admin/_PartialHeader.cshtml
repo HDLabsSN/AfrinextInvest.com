@@ -1,0 +1,37 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Menu</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Afrinext Invest</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+
+                @if (User.Identity.IsAuthenticated)
+                    {
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@User.Identity.Name <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a asp-controller="My" asp-action="Index">Profil</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li>
+                                <form asp-action="LogOff" asp-controller="Account" method="post">
+                                    <input class="btn btn-link navbar-link" type="submit" value="Deconnexion" />
+                                </form>
+                        </ul>
+                    </li>
+                    }
+                    else
+                    {
+                    <li><a asp-area="" asp-controller="Account" asp-action="Login">Connexion</a></li>
+                    <li><a asp-area="" asp-controller="Account" asp-action="Register">Inscription</a></li>
+                    }
+            </ul>
+        </div>
+    </div>
+</nav>

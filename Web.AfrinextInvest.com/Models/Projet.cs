@@ -18,7 +18,7 @@ namespace Web.AfrinextInvest.com.Models
         public string Nom { get; set; }
 
         // Le résumé du projet
-        [StringLength(480)]
+        // [StringLength(480)]
         [DisplayName("Résumé du projet")]
         [Required(ErrorMessage = "Vous devez mettre le résumé de votre projet")]
         public string Resume { get; set; }

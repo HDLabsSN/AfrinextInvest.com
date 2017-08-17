@@ -1,4 +1,5 @@
 ﻿@inject Microsoft.ApplicationInsights.AspNetCore.JavaScriptSnippet JavaScriptSnippet
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +20,7 @@
     @Html.Raw(JavaScriptSnippet.FullScript)
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -36,6 +37,31 @@
                     <li><a asp-area="" asp-controller="PartSociales" asp-action="Index">Parts Sociales</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li><a asp-area="" asp-controller="Admin" asp-action="Index">Administration</a></li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@User.Identity.Name <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Profil</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li>
+                                    <form asp-action="LogOff" asp-controller="Account" method="post">
+                                        <input class="btn btn-link navbar-link" type="submit" value="Déconnexion" />
+                                    </form>
+                            </ul>
+                        </li>
+                    }
+                    else
+                    {
+                        <li><a asp-area="" asp-controller="Account" asp-action="Login">Connexion</a></li>
+                        <li><a asp-area="" asp-controller="Account" asp-action="Register">Inscription</a></li>
+                    }
                 </ul>
             </div>
         </div>

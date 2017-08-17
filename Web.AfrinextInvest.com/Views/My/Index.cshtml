@@ -1,0 +1,41 @@
+﻿@{ 
+    Layout = "_SubLayout";
+}
+
+<section class="col-md-10 col-sm-9">
+    <div class="panel panel-info">
+        <div class="panel-body">
+            <div class="col-md-2 c
+                 ol-sm-3">
+                <img src="http://profileplugin.com/wp-content/uploads/upme/cropped-1384318720_Eliza-Dushku-5-800x960.jpg" class="img-thumbnail" alt="Cinque Terre" width="125" height="125">
+            </div>
+            <div class="col-md-10 col-sm-9">
+                <h4>@ViewBag.Nom</h4>
+            </div>
+        </div>
+    </div>
+
+    <h2>Mes projets</h2>
+    <hr />
+
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#home">Tous</a></li>
+        <li><a data-toggle="tab" href="#menu1">En cours</a></li>
+        <li><a data-toggle="tab" href="#menu2">Financés</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="home" class="tab-pane fade in active">
+            <h3>HOME</h3>
+            <p>Some content.</p>
+        </div>
+        <div id="menu1" class="tab-pane fade">
+            <h3>Menu 1</h3>
+            <p>Some content in menu 1.</p>
+        </div>
+        <div id="menu2" class="tab-pane fade">
+            <h3>Menu 2</h3>
+            <p>Some content in menu 2.</p>
+        </div>
+    </div>
+</section>

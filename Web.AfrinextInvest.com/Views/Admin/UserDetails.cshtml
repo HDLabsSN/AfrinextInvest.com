@@ -1,0 +1,61 @@
+﻿@model Web.AfrinextInvest.com.Identity.User
+@{
+    ViewData["Title"] = "Informations d'utilisateur";
+    Layout = "_SubLayout";
+    var groupes = Model.Claims.ToList();
+    var roles = Model.Roles.ToList();
+}
+
+<section class="col-md-10">
+    <h2>Informations de l'utilisateur</h2>
+    <hr />
+    <div class="table-responsive col-md-6">
+        <table class="table table-striped" style="border:1px solid gainsboro;">
+            <tr>
+                <td>Pseudo</td>
+                <td>@Model.UserName</td>
+            </tr>
+            <tr>
+                <td>Nom</td>
+                <td> @Model.Prenom @Model.Nom </td>
+            </tr>
+            <tr>
+                <td>Adresse E-mail</td>
+                <td> @Model.Email</td>
+            </tr>
+            <tr>
+                <td>Téléphone</td>
+                <td>@Model.Portable</td>
+            </tr>
+                
+            <tr>
+                <td>Anniversaire</td>
+                <td>@Model.DateNaissance</td>
+            </tr>
+            <tr>
+                <td>A Propos</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Groupes</td>
+                <td>
+                    @foreach (var item in groupes)
+                    { @item.ClaimValue ; }
+                </td>
+            </tr>
+            <tr>
+                <td>Roles</td>
+                <td>
+                    @foreach (var role in roles)
+                    { @role.RoleId ; }
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-md-6">
+        <a asp-action="UsersIndex" class="btn btn-link">Retour</a>
+        <a class="btn btn-xs btn-warning">Réinitialiser le mot de passe</a>
+        <a class="btn btn-xs btn-danger">Suspendre le compte</a>
+    </div>
+
+</section>

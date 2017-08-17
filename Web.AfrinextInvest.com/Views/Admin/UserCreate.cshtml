@@ -1,0 +1,63 @@
+﻿@model Web.AfrinextInvest.com.Identity.RegisterViewModel
+@{
+    ViewData["Title"] = "Nouvel utilisateur";
+    Layout = "_SubLayout";
+}
+
+<section class="col-md-10">
+    <h2>Nouvel utilisateur</h2>
+    <hr />
+    <div class="col-md-12" style="margin:0.5em auto;">
+    </div>
+
+    <div class="col-md-6">
+        <form asp-action="UserCreate" method="post">
+            <div class="form-group">
+                <label asp-for="Prenom"></label>
+                <input asp-for="Prenom" class="form-control" />
+                <span class="text-danger" asp-validation-for="Prenom"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nom"></label>
+                <input asp-for="Nom" class="form-control" />
+                <span class="text-danger" asp-validation-for="Nom"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserName" ></label>
+                <input asp-for="UserName" class="form-control" />
+                <span class="text-danger" asp-validation-for="UserName"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" />
+                <span class="text-danger" asp-validation-for="Email"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password"></label>
+                <input asp-for="Password" class="form-control" />
+                <span class="text-danger" asp-validation-for="Password"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfirmPassword"></label>
+                <input asp-for="ConfirmPassword" class="form-control" />
+                <span class="text-danger" asp-validation-for="ConfirmPassword"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Portable"></label>
+                <input asp-for="Portable" class="form-control" />
+                <span class="text-danger" asp-validation-for="Portable"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateNaissance"></label>
+                <input asp-for="DateNaissance" class="form-control" />
+                <span class="text-danger" asp-validation-for="DateNaissance"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Enregistrer" class="btn btn-sm btn-success" />
+                <a asp-action="UsersIndex" class="btn btn-sm btn-danger">Annuler</a>
+            </div>
+        </form>
+    </div>
+
+</section>

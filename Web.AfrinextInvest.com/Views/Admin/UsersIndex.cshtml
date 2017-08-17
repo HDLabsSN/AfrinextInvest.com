@@ -1,0 +1,36 @@
+@model IEnumerable<Web.AfrinextInvest.com.Identity.User>
+
+@{
+ViewData["Title"] = "UsersIndex";
+Layout = "_SubLayout";
+}
+
+<section class="col-md-10">
+    <h2>Utilisateurs</h2>
+    <hr />
+    <div class="col-md-12" style="margin:0.5em auto;">
+        <a asp-action="UserCreate" class="btn btn-xs btn-primary">Ajouter</a>
+    </div>
+    <table class="table table-striped table-hover">
+        <tr>
+            <th>Nom</th>
+            <th>Pseudo</th>
+            <th>E-Mail</th>
+            <th>Telephone</th>
+            <th>Statut</th>
+            <th>Action</th>
+        </tr>
+        @foreach(var Item in Model){
+            <tr>
+                <td>@Item.Prenom @Item.Nom</td>
+                <td>@Item.UserName</td>
+                <td>@Item.Email</td>
+                <td>@Item.Portable</td>
+                <td></td>
+                <td>
+                    <a asp-action="UserDetails" asp-route-UserName ="@Item.UserName" class="btn btn-link">Details</a>
+                </td>
+            </tr>
+}
+    </table>
+</section>

@@ -1,10 +1,13 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Web.AfrinextInvest.com.Data;
+using Web.AfrinextInvest.com.Identity;
 using Web.AfrinextInvest.com.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace Web.AfrinextInvest.com
 {
@@ -32,6 +35,13 @@ namespace Web.AfrinextInvest.com
             var MySQLConnexionString = Configuration.GetConnectionString("MySQLConnection");
 
             services.AddDbContext<AfrinextInvestContext>(options => options.UseMySql(MySQLConnexionString));
+            services.AddDbContext<IdentityContext>(options => options.UseMySql(MySQLConnexionString));
+            services.AddIdentity<User, Role>()
+                .AddEntityFrameworkStores<IdentityContext>()
+                .AddDefaultTokenProviders();
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,6 +61,7 @@ namespace Web.AfrinextInvest.com
             }
 
             app.UseStaticFiles();
+            app.UseIdentity();
 
             app.UseMvc(routes =>
             {

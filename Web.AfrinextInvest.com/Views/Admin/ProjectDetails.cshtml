@@ -1,0 +1,75 @@
+﻿@model Web.AfrinextInvest.com.Models.Projet
+@using System.Globalization;
+
+@{
+    ViewData["Title"] = "Details";
+    // Gets a NumberFormatInfo associated with the en-US culture.
+    NumberFormatInfo nfi = new CultureInfo("fr-SN").NumberFormat;
+    string etatVerification = null;
+    Layout = "_SubLayout";
+}
+
+<section class="col-md-10 col-sm-9">
+    <h2>Détails du projet</h2>
+    <hr />
+    <article class="col-md-8">
+        <div class="panel panel-default">
+            <div class="panel-heading" style="height:400px;"></div>
+            <div class="panel-body">
+                <small><a href="#" class="btn btn-link"><i class="glyphicon glyphicon-flash"></i> @Model.SecteurActvite </a></small>
+                <small> <a class="btn btn-link"><i class="glyphicon glyphicon-map-marker"></i> @Model.Pays </a> </small>
+                @if (Model.isVerified && !Model.isDraft)
+                {
+                    <span class="pull-right label label-success"><i class="glyphicon glyphicon-ok-sign"></i> Vérifié</span>
+                }
+                else
+                {
+                    if (!Model.isDraft && !Model.isDraft)
+                    {
+                        <span class="pull-right label label-warning"><i class="glyphicon glyphicon-refresh"></i> En attente</span>
+                    }
+                    else
+                    {
+                        <span class="pull-right label label-danger"><i class="glyphicon glyphicon-eye-close"></i> Brouillon</span>
+                    }
+                }
+                <br />
+                <p class="text-right text-muted">
+                    <i>Soumis le @Model.DateCreation par Mamoudou Aliou Ba </i>
+                </p>
+
+                <h4 class="text-center ani-project-title text-info"> @Model.Nom </h4>
+                <p> @Model.Description </p>
+                <div class="ani-project-report" style="margin-top: 2em; padding-top: 1em; border-top: 3px solid #00ff21;">
+                    <div class="col-md-3 text-center" style="padding:0;">
+                        <i class="glyphicon glyphicon-user"></i> <br />
+                        <small> 14 Contributions</small>
+                    </div>
+                    <div class="col-md-6 text-center" style="padding:0;">
+                        <i class="glyphicon glyphicon-usd"></i> <br />
+                        <small> 15624889 CFA / 14789556 Collectés</small>
+                    </div>
+                    <div class="col-md-3 text-center" style="padding:0;">
+                        <i class="glyphicon glyphicon-usd"></i> <br />
+                        <small> 156458 CFA Restant</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+    <div class="col-md-4">
+        <a asp-action="ProjectIndex" class="btn btn-link">Retour</a>
+        @if (Model.isDraft)
+        {
+            <button class="disabled btn btn-xs btn-success">Approuver</button>
+        }
+        else
+        {
+            if (Model.isDraft)
+            { 
+                <a asp-action="ProjectValidate" asp-route-Id="@Model.Id" class="btn btn-xs btn-success">Approuver</a>
+            }
+        }
+        <a asp-action="ProjectHold" asp-route-Id="@Model.Id" class="btn btn-xs btn-danger">Suspendre</a>
+    </div>
+</section>

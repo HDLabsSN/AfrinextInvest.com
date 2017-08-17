@@ -1,0 +1,54 @@
+@model Web.AfrinextInvest.com.Identity.RegisterViewModel
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h2>Register</h2>
+
+<form asp-controller="Account" asp-action="Register" method="post">
+    <div class="well">
+        <div class="form-group">
+            <label asp-for="UserName"></label><br/>
+            <input class="form-control" asp-for="UserName"  />
+            <span asp-validation-for="UserName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Password"></label><br/>
+            <input class="form-control" asp-for="Password"  />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ConfirmPassword"></label><br/>
+            <input class="form-control" asp-for="ConfirmPassword"  />
+            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Email"></label><br/>
+            <input class="form-control" asp-for="Email"  />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Prenom"></label><br/>
+            <input class="form-control" asp-for="Prenom"  />
+            <span asp-validation-for="Prenom" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Nom"></label><br/>
+            <input class="form-control" asp-for="Nom"  />
+            <span asp-validation-for="Nom" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="DateNaissance"></label><br/>
+            <input class="form-control" asp-for="DateNaissance"  />
+            <span asp-validation-for="DateNaissance" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Portable"></label><br/>
+            <input class="form-control" asp-for="Portable"  />
+            <span asp-validation-for="Portable" class="text-danger"></span>
+        </div>
+
+        <input class="btn btn-success" type="submit" value="Valider" />
+    </div>
+</form>
