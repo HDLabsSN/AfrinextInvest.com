@@ -68,8 +68,6 @@ namespace Web.AfrinextInvest.com.Controllers
                 user.UserName = objet.UserName;
                 user.Email = objet.Email;
                 user.PhoneNumber = objet.Portable;
-                user.Portable = objet.Portable;
-                user.DateNaissance = objet.DateNaissance;
 
                 IdentityResult result = _usermanager.CreateAsync(user, objet.Password).Result;
 
@@ -182,7 +180,7 @@ namespace Web.AfrinextInvest.com.Controllers
                 if (projet == null)
                     return NotFound();
 
-                projet.isVerified = true;
+                projet.State = "Validé";
                 _context.Update(projet);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("ProjectIndex");
@@ -208,7 +206,7 @@ namespace Web.AfrinextInvest.com.Controllers
                 if (projet == null)
                     return NotFound();
 
-                projet.isVerified = true;
+                projet.State = "Suspendu";
                 await _context.SaveChangesAsync();
                 return RedirectToAction("ProjectIndex");
             }

@@ -35,7 +35,6 @@ namespace Web.AfrinextInvest.com.Controllers
                 user.Email = obj.Email;
                 user.Prenom = obj.Prenom;
                 user.Nom = obj.Nom;
-                user.DateNaissance = obj.DateNaissance;
                 user.PhoneNumber = obj.Portable;
 
                 IdentityResult result = userManager.CreateAsync

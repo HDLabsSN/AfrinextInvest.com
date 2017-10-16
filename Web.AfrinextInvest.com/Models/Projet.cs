@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Web.AfrinextInvest.com.Identity;
 
 namespace Web.AfrinextInvest.com.Models
 {
@@ -12,13 +12,16 @@ namespace Web.AfrinextInvest.com.Models
         [ScaffoldColumn(false)]
         public int Id { get; set; }
 
-        [StringLength(50)]
+        [StringLength(60)]
         [DisplayName("Nom du projet")]
         [Required(ErrorMessage = "Vous devez mettre le nom de votre projet")]
         public string Nom { get; set; }
 
+        // Les images du projet
+        //public int ProjectImagesId { get; set; }
+
         // Le résumé du projet
-        // [StringLength(480)]
+        [StringLength(480)]
         [DisplayName("Résumé du projet")]
         [Required(ErrorMessage = "Vous devez mettre le résumé de votre projet")]
         public string Resume { get; set; }
@@ -44,16 +47,22 @@ namespace Web.AfrinextInvest.com.Models
         [ScaffoldColumn(false)]
         public DateTime DateCreation { get; set; }
 
+        // Project Owner
         [ScaffoldColumn(false)]
-        public DateTime DerniereModification { get; set; }
+        public string ProjectOwnerId { get; set; }
 
+        // Etat du projet (Brouillon, En attente (Soumis_Pour validation), Validé, Rejeté, suspendu)
         [ScaffoldColumn(false)]
-        public bool isDraft { get; set; }
-
-        [ScaffoldColumn(false)]
-        public bool isVerified { get; set; }
+        public string State { get; set; }
 
         [ForeignKey("SecteurId")]
         public virtual SecteurActivite SecteurActvite { get; set; }
+
+        [ForeignKey("ProjectOwnerId")]
+        public virtual User ProjectOwner { get; set; }
+
+        //[ForeignKey("ProjectImagesId")]
+        //public virtual MediaProjet ProjectImages { get; set; }
     }
+
 }

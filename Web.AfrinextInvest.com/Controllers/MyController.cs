@@ -33,5 +33,38 @@ namespace Web.AfrinextInvest.com.Controllers
             ViewData.Add("Nom", Name);
             return View();
         }
+
+        public async Task<IActionResult> Profile()
+        {
+            var loggedInUser = await _usermanager.FindByIdAsync(this._userId);
+            string Name = loggedInUser.Prenom + " " + loggedInUser.Nom;
+            ViewData.Add("Nom", Name);
+            return View(loggedInUser);
+        }
+
+        [Route("My/Profile/Edit")]
+        [HttpGet]
+        public async Task<IActionResult> EditProfile()
+        {
+            var loggedInUser = await _usermanager.FindByIdAsync(this._userId);
+            string Name = loggedInUser.Prenom + " " + loggedInUser.Nom;
+            ViewData.Add("Nom", Name);
+            return View(loggedInUser);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditProfile([Bind("Prenom","Nom","UserName","Email","Bio")] User user)
+        {
+            var loggedInUser = await _usermanager.FindByIdAsync(this._userId);
+            string Name = loggedInUser.Prenom + " " + loggedInUser.Nom;
+            ViewData.Add("Nom", Name);
+
+            if (ModelState.IsValid)
+            {
+                _context.Update(user);
+                await _context.SaveChangesAsync();
+            }
+            return View(loggedInUser);
+        }
     }
 }

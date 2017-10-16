@@ -65,10 +65,7 @@ namespace Web.AfrinextInvest.com.Controllers
                 projet.DateCreation = DateTime.Now;
 
                 // Par défaut le projet est enregistré en tant que brouillon
-                projet.isDraft = true;
-
-                // Par défaut le projet n'est pas vérifié par les administrateurs
-                projet.isVerified = false;
+                projet.State ="Brouillon";
 
                 _context.Add(projet);
                 await _context.SaveChangesAsync();

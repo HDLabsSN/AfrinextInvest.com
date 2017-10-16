@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Web.AfrinextInvest.com.Identity
 {
@@ -20,9 +19,6 @@ namespace Web.AfrinextInvest.com.Identity
         public string Prenom { get; set; }
         [Required]
         public string Nom { get; set; }
-        [Required]
-        [DataType(DataType.Date)]
-        public DateTime DateNaissance { get; set; }
         [Required]
         [DataType(DataType.PhoneNumber)]
         public string Portable { get; set; }

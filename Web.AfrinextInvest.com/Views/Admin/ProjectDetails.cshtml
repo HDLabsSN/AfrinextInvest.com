@@ -5,7 +5,6 @@
     ViewData["Title"] = "Details";
     // Gets a NumberFormatInfo associated with the en-US culture.
     NumberFormatInfo nfi = new CultureInfo("fr-SN").NumberFormat;
-    string etatVerification = null;
     Layout = "_SubLayout";
 }
 
@@ -18,13 +17,13 @@
             <div class="panel-body">
                 <small><a href="#" class="btn btn-link"><i class="glyphicon glyphicon-flash"></i> @Model.SecteurActvite </a></small>
                 <small> <a class="btn btn-link"><i class="glyphicon glyphicon-map-marker"></i> @Model.Pays </a> </small>
-                @if (Model.isVerified && !Model.isDraft)
+                @if (Model.State.Equals("Validé"))
                 {
                     <span class="pull-right label label-success"><i class="glyphicon glyphicon-ok-sign"></i> Vérifié</span>
                 }
                 else
                 {
-                    if (!Model.isDraft && !Model.isDraft)
+                    if (Model.State.Equals("En Attente"))
                     {
                         <span class="pull-right label label-warning"><i class="glyphicon glyphicon-refresh"></i> En attente</span>
                     }
@@ -59,13 +58,13 @@
     </article>
     <div class="col-md-4">
         <a asp-action="ProjectIndex" class="btn btn-link">Retour</a>
-        @if (Model.isDraft)
+        @if (Model.State.Equals("Brouillon"))
         {
             <button class="disabled btn btn-xs btn-success">Approuver</button>
         }
         else
         {
-            if (Model.isDraft)
+            if (Model.State.Equals("En attente"))
             { 
                 <a asp-action="ProjectValidate" asp-route-Id="@Model.Id" class="btn btn-xs btn-success">Approuver</a>
             }

@@ -2,53 +2,98 @@
 
 @{
     ViewData["Title"] = "Register";
+    Layout = null;
 }
 
-<h2>Register</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Web.AfrinextInvest.com</title>
 
-<form asp-controller="Account" asp-action="Register" method="post">
-    <div class="well">
-        <div class="form-group">
-            <label asp-for="UserName"></label><br/>
-            <input class="form-control" asp-for="UserName"  />
-            <span asp-validation-for="UserName" class="text-danger"></span>
+    <environment names="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Menu</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Afrinext Invest</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a asp-area="" asp-controller="Account" asp-action="Login">Connexion</a></li>
+                </ul>
+            </div>
         </div>
-        <div class="form-group">
-            <label asp-for="Password"></label><br/>
-            <input class="form-control" asp-for="Password"  />
-            <span asp-validation-for="Password" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="ConfirmPassword"></label><br/>
-            <input class="form-control" asp-for="ConfirmPassword"  />
-            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Email"></label><br/>
-            <input class="form-control" asp-for="Email"  />
-            <span asp-validation-for="Email" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Prenom"></label><br/>
-            <input class="form-control" asp-for="Prenom"  />
-            <span asp-validation-for="Prenom" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Nom"></label><br/>
-            <input class="form-control" asp-for="Nom"  />
-            <span asp-validation-for="Nom" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="DateNaissance"></label><br/>
-            <input class="form-control" asp-for="DateNaissance"  />
-            <span asp-validation-for="DateNaissance" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Portable"></label><br/>
-            <input class="form-control" asp-for="Portable"  />
-            <span asp-validation-for="Portable" class="text-danger"></span>
-        </div>
+    </nav>
 
-        <input class="btn btn-success" type="submit" value="Valider" />
+    <div class="container">
+        <h3 class="text-center">Creer votre compte AfrinextInvest</h3>
+        <hr />
+
+        <div class="col-md-4 col-md-offset-8 well">
+            <form asp-controller="Account" asp-action="Register" method="post">
+                <div class="form-group">
+                    <label asp-for="Prenom"></label><br />
+                    <input class="form-control" asp-for="Prenom" />
+                    <span asp-validation-for="Prenom" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Nom"></label><br />
+                    <input class="form-control" asp-for="Nom" />
+                    <span asp-validation-for="Nom" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="UserName"></label><br />
+                    <input class="form-control" asp-for="UserName" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password"></label><br />
+                    <input class="form-control" asp-for="Password" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ConfirmPassword"></label><br />
+                    <input class="form-control" asp-for="ConfirmPassword" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email"></label><br />
+                    <input class="form-control" asp-for="Email" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Portable"></label><br />
+                    <input class="form-control" asp-for="Portable" />
+                    <span asp-validation-for="Portable" class="text-danger"></span>
+                </div>
+
+                <input class="btn btn-success btn-block" type="submit" value="Valider" />
+            </form>
+        </div>
     </div>
-</form>
+    <hr />
+    <footer>
+        <p class="text-center">&copy; 2017 - Web.AfrinextInvest.com</p>
+    </footer>
+</body>
+</html>
+
